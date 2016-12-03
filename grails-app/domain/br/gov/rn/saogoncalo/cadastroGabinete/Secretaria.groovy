@@ -4,7 +4,7 @@ class Secretaria {
 	
 	String secretaria
 	boolean ativo
-	
+	// SecretariaCargo tanto em hasmany como no belongTo? e a variável com o mesmo nome? (secretariaCargo). Ta certo isso?
 	static hasmany =[secretariaCargo:SecretariaCargo]
     static belongTo = [secretariaCargo:SecretariaCargo]
     static constraints = {
