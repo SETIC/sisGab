@@ -3,7 +3,6 @@ package br.gov.rn.saogoncalo.cadastroGabinete
 class Cargo {
 	
 	String cargo
-	String tipoCargo
 	boolean ativo
 	
 	static hasmany = [secretariaCargo:SecretariaCargo]
@@ -12,7 +11,6 @@ class Cargo {
 
     static constraints = {
 	cargo nullable:false, blank:false
-	tipoCargo nullable:false, blank:false
 	ativo  nullable:false, blank:false
 	
     }
