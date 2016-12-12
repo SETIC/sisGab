@@ -5,7 +5,6 @@ class Funcionario {
 	String nome
 	String cpf
 	boolean efetivo
-	String portaria
 	String lotacao
 	
 
@@ -14,7 +13,6 @@ class Funcionario {
 	nome nullable:false, blank:false
 	cpf unique:true, nullable:false, blank:false
 	efetivo  nullable:false, blank:false
-	portaria unique:false, nullable:false, blank:false
 	lotacao nullable:false, blank:false
   }
 	static mapping = {
