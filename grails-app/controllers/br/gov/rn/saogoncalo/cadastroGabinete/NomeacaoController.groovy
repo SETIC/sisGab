@@ -21,8 +21,14 @@ class NomeacaoController {
 	
 	def cadastrarNomeacao(){
 		
-		render (view:"/nomeacao/cadastrar.gsp", model:[])
+		if(true){
+	
 		
+		render (view:"/nomeacao/cadastrar.gsp", model:[])
+		flash.message = "cadastro efetuado com sucesso!!!!"
+		}else{
+		flash.erro = "pagina de erro"
+		}
 	}
 	
 	def pesquisar(){

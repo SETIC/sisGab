@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<title>Protocolo . Módulo Protocolo</title>
+<title>Nomeação . Módulo Gabinete</title>
 <meta name="layout" content="public" />
 </head>
 <body>
@@ -81,12 +81,8 @@
 		</script>
 	    <section class="content-header">
 		<h1>
-			Nomeações <small>Consulta de Funcionários</small>
+			Nomeações <small>Consulta de Nomeações</small>
 		</h1>
-		<ol class="breadcrumb">
-			<li class="active"><g:link controller="Layout" action="index">
-					<i class="fa fa-dashboard"></i> Inicio</g:link></li>
-		</ol>
 		<br>
 			<g:form controller="nomeacao" action="pesquisar" class="form">
 			<div class="form-heading" style="width:150px;">
@@ -123,7 +119,7 @@
 			</g:if>
                        
 			<div class="box box-white">
-				<table id="pequisarprotocolo"
+				<table id="pequisarNomeacoes"
 					class="table table-striped table-hover example">
 					<thead>
 						<tr>
@@ -142,7 +138,7 @@
 								<td>
 									<div style="margin-left: 10px" class="opcoes">
 										<ul style="display: inline">
-											<li title="Ver detalhes do protocolo"
+											<li title="Ver detalhes da nomeacao"
 												class="btn btn-success btn-xs btn-flat"><a
 												style="color: #fff"
 												href="/sisGab/Nomeacao/verInfo/${}"><span

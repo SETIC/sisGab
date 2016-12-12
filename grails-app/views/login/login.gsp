@@ -47,7 +47,7 @@
     <div id="wrap">  
       <div class="login-box">
         <div class="login-logo">
-          <a href="http://189.43.7.23:8080/sisOs/usuariosOs/login"><g:img style="width: 50%" dir="images" file="prot.png"/></a>
+          <a href="http://189.43.7.23:8080/sisGab/nomeacao/login"><g:img style="width: 30%" dir="images" file="sga.png"/></a>
         </div><!-- /.login-logo -->
         <div class="login-box-body">
           <p class="login-box-msg">Entre para iniciar a sua sessão</p>

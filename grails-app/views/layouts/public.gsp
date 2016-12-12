@@ -108,8 +108,12 @@
 	<div class="wrapper">
       <header class="main-header">
         <!-- Logo -->
+        <a href="index2.html" class="logo"> <!-- mini logo 50x50 pixels -->
+						<span class="logo-mini"><b></b></span> <!-- logo regular --> <span
+						class="logo-lg"><b>SIS</b>GAB</span>
+					</a><%--
         <g:link controller="Layout" action="index" class="logo"><g:img dir="images" file="setic.png" style="width: 30%; margin-top: -6%;" class="img-circle" alt="Logo do Sistema"/></g:link>
-        <!-- Header Navbar: style can be found in header.less -->
+        --%><!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
           <!-- Sidebar toggle button-->
           <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
@@ -127,7 +131,7 @@
                 <ul class="dropdown-menu">
                   <!-- User image -->
                   <li class="user-header">
-                  	<g:img dir="images" file="photo-profile-default-gray.png" class="img-circle" alt="User Image"/>
+                  	<g:img dir="images" file="envato.png" class="img-circle" alt="User Image"/>
                     <p>
                       ${}<br>
                       <p style="font-size:12px;">
@@ -206,9 +210,9 @@
 	  </div>	
       <footer class="main-footer">
           <div class="pull-right hidden-xs">
-            <b>Version</b> 2.0
+            <b>Version</b> 1.0
           </div>
-          <strong> Copyright © 2014-2015 <a style="font-weight: 400;" href="#"><b>SIS</b>EDUC</a>.</strong> Todos os direitos reservados. Contato SETIC: 98152-9740
+          <strong> Copyright © 2016 <a style="font-weight: 400;" href="#"><b>SIS</b>GAB</a>.</strong> Todos os direitos reservados. Contato SETIC: 98152-9740
       </footer>
 
 			<!-- Modal Senha -->
@@ -261,8 +265,8 @@
 					</div>
 				</div>
 			</div>
-
-
+           
+          
 
 	<!-- ./wrapper -->
 	<!-- Bootstrap 3.3.2 JS -->
