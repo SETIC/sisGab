@@ -1,31 +1,32 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<title>Nomeação . Módulo Gabinete</title>
+<title>Protocolo . Módulo Protocolo</title>
 <meta name="layout" content="public" />
 </head>
 <body>
 	<script>
-		//function printDiv(id) {
-			//var divToPrint = document.getElementById(id);
-			//newWin = window.open("");
+
+		function printDiv(id) {
+			var divToPrint = document.getElementById(id);
+			newWin = window.open("");
 			
-			//newWin.document.write("<table border='0'>");
-			//newWin.document.write("<tr>");
-			//newWin.document.write("<td> <img src='${ request.getRequestURL().substring(0, request.getRequestURL().indexOf('sisGab/'))}sisGab/static/images/brasao.jpg'; style='width:100px; float:left; margin-top:-9px;'> </td>");
-			//newWin.document.write("<td>");
-			//newWin.document.write("<p style='text-align:center; '>PREFEITURA MUNICIPAL DE SÃO GONÇALO DO AMARANTE - RN</p>");
-			//newWin.document.write("<p style='text-align:center; margin-top:-8px;'>SECRETARIA DE EDUCAÇÃO E CULTURA - SEMEC</p>");
-			//newWin.document.write("</td>");
-			//newWin.document.write("</tr>");
-			//newWin.document.write("</table><br>");
+			newWin.document.write("<table border='0'>");
+			newWin.document.write("<tr>");
+			newWin.document.write("<td> <img src='${ request.getRequestURL().substring(0, request.getRequestURL().indexOf('sisGab/'))}sisGab/static/images/brasao.jpg'; style='width:100px; float:left; margin-top:-9px;'> </td>");
+			newWin.document.write("<td>");
+			newWin.document.write("<p style='text-align:center; '>PREFEITURA MUNICIPAL DE SÃO GONÇALO DO AMARANTE - RN</p>");
+			newWin.document.write("<p style='text-align:center; margin-top:-8px;'>GABINETE CIVIL</p>");
+			newWin.document.write("</td>");
+			newWin.document.write("</tr>");
+			newWin.document.write("</table><br>");
 			  
-			//newWin.document.write("RELATÓRIO GERENCIAL <br><br>");
-			//newWin.document.write(" ");
-			//newWin.document.write(divToPrint.outerHTML);
-			//newWin.print();
-			//newWin.close();
-		//}
+			newWin.document.write("RELATÓRIO GERENCIAL <br><br>");
+			newWin.document.write(" ");
+			newWin.document.write(divToPrint.outerHTML);
+			newWin.print();
+			newWin.close();
+		}
 		
 		function mudarSelecao(){
 			
@@ -83,7 +84,6 @@
 		<h1>
 			Nomeações <small>Consulta de Nomeações</small>
 		</h1>
-		<br>
 			<g:form controller="nomeacao" action="pesquisar" class="form">
 			<div class="form-heading" style="width:150px;">
 				<label>Tipo de Busca</label>
@@ -119,7 +119,8 @@
 			</g:if>
                        
 			<div class="box box-white">
-				<table id="pequisarNomeacoes"
+
+				<table id="listarPesquisa"
 					class="table table-striped table-hover example">
 					<thead>
 						<tr>
@@ -138,15 +139,17 @@
 								<td>
 									<div style="margin-left: 10px" class="opcoes">
 										<ul style="display: inline">
-											<li title="Ver detalhes da nomeacao"
+
+											<li title="Ver detalhes do protocolo"
 												class="btn btn-success btn-xs btn-flat"><a
 												style="color: #fff"
-												href="/sisGab/Nomeacao/verInfo/${}"><span
+												href="/sisGab/nomeacao/info/${it.id}"><span
 													class="fa fa-times"></span></a></li> 
 																					
 												<li title="Editar Nomeacao" class="btn btn-primary btn-xs btn-flat"><a
 													style="color: #fff"
-													href="/sisGab/Nomeacao/editar/${}"><span
+
+													href="/sisGab/nomeacao/editar/${it.id}"><span
 														class="fa fa-pencil"></span></a></li>
 										
 										</ul>
@@ -175,7 +178,10 @@
 							</tr>
 						</g:each>
 					</tbody>
-				</table>
+				   </table>
+				<button class="btn btn-danger btn-flat" onClick="printDiv('listarPesquisa')">
+				<i class="fa fa-print"></i> Imprimir
+			</button>
 			</div>
 		</div>
 	</section>

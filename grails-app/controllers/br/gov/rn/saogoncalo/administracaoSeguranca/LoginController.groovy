@@ -5,7 +5,7 @@ import administracaoSeguranca.Login;
 
 class LoginController {
 
-    def index() { }
+    def login() { }
 	
 	def getPrincipal(){
 		
@@ -25,12 +25,15 @@ class LoginController {
 		println(userLogin)
 						
 		  if(userLogin != null){
+
 			 
 			  session["user"] = user
 			  session["pass"] = pass
 		
-			  render(view:"/nomeacao/listar.gsp")
+
+			  render(view:"/principal.gsp")
 			
+			  
 		  }else{
 		  
 			  render(view:"/login/login.gsp", model:[erro:"O usuario ou a senha inseridos estao incorretos."])
@@ -41,7 +44,38 @@ class LoginController {
 		   
 		session["user"] = null
 		session["pass"] = null
-		render(view:"/index.gsp")
+
+		render(view:"/login/login.gsp")
 	}
+	   
+	   
+	   def redefinirSenha(){
+		   
+			   
+			   if((session["user"] == null) || (session["pass"] == null) ){
+				   render (view:"/login/login.gsp")
+			   }else{
+				   def user = session["user"]
+				   def pass = session["pass"]
+
+
+					   def login = Login.findByUsuarioAndSenha(user,pass)
+	   
+					   if ((params.senhaNova1) == params.senhaNova2) {
+						   if ((params.senhaNova1 != "") && (params.senhaAntiga != "")){
+							   login.senha = params.senhaNova1
+						   }
+					   }
+	   
+	   
+					   if(login.save(flush:true)){
+						   render(view:"/login/login.gsp")
+					   }
+			   
+				   }
+
+		   
+		   }
+	   
 	
 }

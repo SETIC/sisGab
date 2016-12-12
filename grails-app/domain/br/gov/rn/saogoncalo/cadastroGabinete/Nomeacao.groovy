@@ -12,9 +12,8 @@ class Nomeacao {
     static constraints = {
 		dataNomeacao nullable:false, blank:false
 		ativo  nullable:false, blank:false
-		portaria unique:false, nullable:false, blank:false
-		
-		
+		portaria nullable:false, blank:false
+	
     }
 	static mapping = {
 		table name: "nomeacao", schema:"cadastro_gabinete"

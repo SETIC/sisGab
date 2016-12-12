@@ -108,12 +108,9 @@
 	<div class="wrapper">
       <header class="main-header">
         <!-- Logo -->
-        <a href="index2.html" class="logo"> <!-- mini logo 50x50 pixels -->
-						<span class="logo-mini"><b></b></span> <!-- logo regular --> <span
-						class="logo-lg"><b>SIS</b>GAB</span>
-					</a><%--
+
         <g:link controller="Layout" action="index" class="logo"><g:img dir="images" file="setic.png" style="width: 30%; margin-top: -6%;" class="img-circle" alt="Logo do Sistema"/></g:link>
-        --%><!-- Header Navbar: style can be found in header.less -->
+        <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
           <!-- Sidebar toggle button-->
           <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
@@ -125,21 +122,23 @@
               <!-- User Account: style can be found in dropdown.less -->
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <g:img dir="images" file="photo-profile-default-gray.png" class="user-image" alt="User Image"/>
-                  <span class="hidden-xs">${}</span>
+
+                  <g:img dir="images" file="setic.png" class="user-image" alt="User Image"/>
+                  <span class="hidden-xs"></span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- User image -->
                   <li class="user-header">
-                  	<g:img dir="images" file="envato.png" class="img-circle" alt="User Image"/>
+
+                  	<g:img dir="images" file="setic.png" class="img-circle" alt="User Image"/>
                     <p>
-                      ${}<br>
+                      <br>
                       <p style="font-size:12px;">
-                       ${} 
+                       
                        </p>
 
                     <p style="font-size: 12px;">
-                    	${}
+                    	
                     </p>
                   </li>
                   
@@ -170,16 +169,13 @@
           <!-- Sidebar user panel -->
           <div class="user-panel">
             <div class="pull-left image">
-              <g:img dir="images" file="setic.png" class="img-circle" alt="User Image"/>
+
+              <g:img dir="images" file="sga.png" class="img-circle" alt="User Image"/>
             </div>
             <div class="pull-left info">
-              <p style="margin-top: 10.5px;">${}</p>
-
+              <p style="margin-top: 10.5px;"></p>
                       <p style="font-size:12px;">
-                      
-                       ${}
-                      
-                      </p>
+                    </p>
               
               <!-- <a href="#"><i class="fa fa-circle text-success"></i> Online</a> -->
             </div>
@@ -188,14 +184,13 @@
           <ul class="sidebar-menu">
             <li class="header">MENU PRINCIPAL</li>
             <li class="active treeview">
-              <g:link controller="Layout" action="index">
-                <i class="fa fa-dashboard"></i> <span>Painel</span>
-              </g:link>
+
+              <li class="active treeview"><a href="/sisGab/login/getPrincipal"> 
+							    <i class="fa fa-dashboard"></i> <span>Painel</span>
+							</a></li>
               <li><a href="/sisGab/nomeacao/listar">
-              <i class="fa fa-th"></i> <span>Listagem de nomeações</span></a></li>
+              <i class="fa fa-th"></i> <span> Nomeações</span></a></li>
 			  <li class="active treeview">
-			  <a href="/sisGab/nomeacao/cadastrarNomeacao">
-			  <i class="fa fa-plus"></i> <span>Cadastrar nomeação</span></a></li>
 			    <li><a href="/sisGab/nomeacao/pesquisar">
 			  <i class="fa fa-search"></i> <span>Pesquisar</span></a></li>
 			  <li><g:link controller="Login" action="logout"><i class="fa fa-circle-o text-red"></i>
@@ -212,7 +207,8 @@
           <div class="pull-right hidden-xs">
             <b>Version</b> 1.0
           </div>
-          <strong> Copyright © 2016 <a style="font-weight: 400;" href="#"><b>SIS</b>GAB</a>.</strong> Todos os direitos reservados. Contato SETIC: 98152-9740
+
+          <strong> Copyright © 2016 <a style="font-weight: 400;" href="#"><b>SIS</b>GAB</a>.</strong> Todos os direitos reservados.
       </footer>
 
 			<!-- Modal Senha -->
@@ -227,7 +223,8 @@
 							<h4 class="modal-title" id="myModalLabel">Redefinição de senha</h4>
 						</div>
 						<div class="modal-body">
-							<g:form controller="Usuario" action="redefinirSenha" class="form">
+
+							<g:form controller="login" action="redefinirSenha" class="form">
 								<fieldset>
 									
 									<div class="form-heading">
@@ -265,8 +262,8 @@
 					</div>
 				</div>
 			</div>
-           
-          
+
+
 
 	<!-- ./wrapper -->
 	<!-- Bootstrap 3.3.2 JS -->

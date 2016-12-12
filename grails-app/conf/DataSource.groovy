@@ -1,6 +1,7 @@
 dataSource {
     pooled = true
     jmxExport = true
+
 	driverClassName = "org.postgresql.Driver"
     dialect = "org.hibernate.dialect.PostgreSQLDialect"
 
@@ -21,6 +22,7 @@ hibernate {
 environments {
     development {
         dataSource {
+
             driverClassName = "org.postgresql.Driver"
 			  
 			username = "admin_db_sr"
@@ -29,23 +31,26 @@ environments {
 			dbCreate = "update" // one of 'create', 'create-drop', 'update', 'validate', ''
 					
 			  url = "jdbc:postgresql://192.168.1.252:5667/db_gabinete"
+
         }
     }
     test {
         dataSource {
             dbCreate = "update"
+
             url = ""
         }
     }
     production {
         dataSource {
+
 			driverClassName = "org.postgresql.Driver"
             dbCreate = "update"
 			  url = "jdbc:postgresql://192.168.1.252:5667/db_gabinete"
 			
 			}
 			 }
-			
+
             properties {
                // See http://grails.org/doc/latest/guide/conf.html#dataSource for documentation
                jmxEnabled = true
@@ -65,6 +70,7 @@ environments {
                testOnReturn = false
                jdbcInterceptors = "ConnectionState"
                defaultTransactionIsolation = java.sql.Connection.TRANSACTION_READ_COMMITTED
+
             
        
     }

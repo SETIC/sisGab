@@ -1,198 +1,107 @@
 <!DOCTYPE html>
 <%@page import="java.lang.System"%>
 <html>
-<head>
-<meta charset="UTF-8">
+	<head>
+		<meta name="layout" content="public"/>
+		<title>Welcome to Grails</title>
+		<style type="text/css" media="screen">
+			#status {
+				background-color: #eee;
+				border: .2em solid #fff;
+				margin: 2em 2em 1em;
+				padding: 1em;
+			 	width: 21em;
+				float: left;
+				-moz-box-shadow: 0px 0px 1.25em #ccc;
+				-webkit-box-shadow: 0px 0px 1.25em #ccc;
+				box-shadow: 0px 0px 1.25em #ccc;
+				-moz-border-radius: 0.6em;
+				-webkit-border-radius: 0.6em;
+				border-radius: 0.6em;
+			}
 
-<title>Sistema de solicitação de chamados . Painel"></title>
-<meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+			.ie6 #status {
+				display: inline; /* float double margin fix http://www.positioniseverything.net/explorer/doubled-margin.html */
+			}
 
-<!-- Bootstrap 3.3.2 -->
-<link href="${resource(dir: 'css', file: 'bootstrap.css')}"
-	rel="stylesheet">
+			#status ul {
+				font-size: 0.9em;
+				list-style-type: none;
+				margin-bottom: 0.6em;
+				padding: 0;
+			}
 
-<!-- Font Awesome Icons -->
-<link
-	href="${resource(dir: 'font-awesome-4.1.0/css', file: 'font-awesome.min.css')}"
-	rel="stylesheet">
+			#status li {
+				line-height: 1.3;
+			}
 
-<!-- Ionicons -->
-<link href="${resource(dir: 'css', file: 'ionicons.min.css')}"
-	rel="stylesheet">
+			#status h1 {
+				text-transform: uppercase;
+				font-size: 1.1em;
+				margin: 0 0 0.3em;
+			}
 
-<!-- Morris chart -->
-<link href="${resource(dir: 'css', file: 'morris/morris.css')}"
-	rel="stylesheet">
+			#page-body {
+				margin: 2em 1em 1.25em 18em;
+			}
 
-<!-- jvectormap -->
-<link
-	href="${resource(dir: 'css', file: 'jvectormap/jquery-jvectormap-1.2.2.css')}"
-	rel="stylesheet">
+			h2 {
+				margin-top: 1em;
+				margin-bottom: 0.3em;
+				font-size: 1em;
+			}
 
-<!-- Daterange picker -->
-<link
-	href="${resource(dir: 'css', file: 'daterangepicker/daterangepicker-bs3.css')}"
-	rel="stylesheet">
+			p {
+				line-height: 1.5;
+				margin: 0.25em 0;
+			}
 
-<!-- Bootstrap Select -->
-<link href="${resource(dir: 'css', file: 'bootstrap-select.css')}"
-	rel="stylesheet">
+			#controller-list ul {
+				list-style-position: inside;
+			}
 
-<!-- DataTable Bootstrap -->
-<link href="${resource(dir: 'css', file: 'dataTables.bootstrap.css')}"
-	rel="stylesheet">
+			#controller-list li {
+				line-height: 1.3;
+				list-style-position: inside;
+				margin: 0.25em 0;
+			}
 
-<!-- Theme style -->
-<link href="${resource(dir: 'css', file: 'AdminLTE.min.css')}"
-	rel="stylesheet">
+			@media screen and (max-width: 480px) {
+				#status {
+					display: none;
+				}
 
-<!-- Form Wizard -->
-<link href="${resource(dir: 'css', file: 'style-form-wizard.css')}"
-	rel="stylesheet">
+				#page-body {
+					margin: 0 1em 1em;
+				}
 
-<!-- Jasny Mask Bootstrap -->
-<link href="${resource(dir: 'css', file: 'jasny-bootstrap.min.css')}"
-	rel="stylesheet">
-
-<!-- Bootstrap Master -->
-<link
-	href="${resource(dir: 'css', file: 'bootstrap-modal-master/css/bootstrap-modal.css')}"
-	rel="stylesheet">
-
-<!-- AdminLTE Skins. Choose a skin from the css/skins 
-         folder instead of downloading all of them to reduce the load. -->
-<link href="${resource(dir: 'css', file: 'skins/_all-skins.min.css')}"
-	rel="stylesheet">
-
-<!-- Bootstrap Models Manager -->
-<link
-	href="${resource(dir: 'css', file: 'bootstrap-modal-master/css/bootstrap-modal.css')}"
-	rel="stylesheet">
-
-<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-<!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-    <![endif]-->
-<style type="text/css">
-.box-white {
-	border-radius: 0;
-	border-top: 0;
-	padding: 1%;
-}
-
-.link-black {
-	color: #000 !important;
-}
-
-.link-black:hover {
-	color: #000 !important;
-	text-shadow: .5px .5px 1px #808080;
-}
-
-.no-active {
-	pointer-events: none;
-	cursor: default;
-	color: #767676 !important;
-	background-color: #E5E5E5;
-}
-
-.hidden {
-	display: none;
-}
-
-.visible {
-	display: block;
-}
-</style>
-<!-- jQuery 2.1.3 -->
-<g:javascript src="jQuery/jQuery-2.1.3.min.js" />
-</head>
-
-<body class="skin-blue row">
-	<div class="wrapper"
-		style="float: inherit; margin-left: auto; margin-right: auto;">
-		<header class="main-header">
-		
-			<!-- Header Navbar: style can be found in header.less -->
-
-					<!-- Logo -->
-					<a href="index2.html" class="logo"> <!-- mini logo 50x50 pixels -->
-						<span class="logo-mini"><b></b></span> <!-- logo regular --> <span
-						class="logo-lg"><b>SIS</b>GAB</span>
-					</a>
-
-					<!-- Header Navbar: style can be found in header.less -->
-					<nav class="navbar navbar-static-top">
-						<!-- Sidebar toggle button-->
-						<a href="#" class="sidebar-toggle" data-toggle="offcanvas"
-							role="button"> <span class="sr-only">Navegação</span>
-						</a>
-						<!-- Navbar Right Menu -->
-						<div class="navbar-custom-menu">
-							<ul class="nav navbar-nav">
-								<!-- Messages: style can be found in dropdown.less-->
-								<li class="dropdown messages-menu">
-									<!-- User Account: style can be found in dropdown.less -->
-								<li class="dropdown user user-menu"><a href="#"
-									class="dropdown-toggle" data-toggle="dropdown"> <span
-										class="hidden-xs">sisGab</span>&nbsp;&nbsp;&nbsp;&nbsp;
-								</a>
-									<ul class="dropdown-menu">
-										<!-- User image -->
-										<li class="user-header">
-
-											<p>
-												Suporte OS<br> <small>Coordena o SISOS -
-													Sistema de Abertura de Chamado Técnico Junto ao Setor de
-													Tecnologia.<br> <br> <br> SETIC -
-													Subsecretaria de Tecnologia da Informação e Ciência
-												</small>
-											</p>
-										</li>
-						</div>
-					</nav>
-				</header>
-				<!-- Left side column. contains the logo and sidebar -->
-				<aside class="main-sidebar">
-					<!-- sidebar: style can be found in sidebar.less -->
-					<section class="sidebar">
-						<!-- Sidebar user panel -->
-						<div class="user-panel">
-							<div class="pull-left image">&nbsp;&nbsp;&nbsp;
-								<g:img dir="images" file="setic.png" style="height:35px;" />
-
-							</div>
-							<div class="pull-left info">
-								<p>Principal</p>
-								<a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-							</div>
-						</div>
-						<ul class="sidebar-menu">
-							<li class="header">MENU PRINCIPAL</li>
-							<li class="active treeview"><a href="/sisGab/nomeacao/cadastrarNomeacao"> 
-							    <i class="fa fa-dashboard"></i> <span>Painel</span>
-							</a></li>
-
-							<li><a href="/sisGab/nomeacao/listar">
-									<i class="fa fa-th"></i> <span>Listagem de nomeações</span>
-							</a></li>
-						<li class="active treeview"><a href="/sisGab/nomeacao/cadastrarNomeacao"> 
-							<i class="fa fa-plus"></i> <span>Cadastrar nomeação</span>
-							</a></li>
-							<li><g:link controller="Login" action="logout"><i class="fa fa-circle-o text-red"></i>
-									<span>Sair</span></g:link></li>
-						</ul>
-					</section>
-					<!-- /.sidebar -->
-				</aside>
-		</header>
-		<!-- Left side column. contains the logo and sidebar -->
-		<!-- Content Wrapper. Contains page content -->
-		<div class="content-wrapper col-md-10 col-md-offset-1"
-			style="float: inherit; margin-left: auto; margin-right: auto; width: 100%; margin-top: 1px">
-			
+				#page-body h1 {
+					margin-top: 0;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<a href="#page-body" class="skip"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
+		<div id="status" role="complementary">
+			<h1>Application Status</h1>
+			<ul>
+				<li>App version: <g:meta name="app.version"/></li>
+				<li>Grails version: <g:meta name="app.grails.version"/></li>
+				<li>Groovy version: ${GroovySystem.getVersion()}</li>
+				<li>JVM version: ${System.getProperty('java.version')}</li>
+				<li>Reloading active: ${grails.util.Environment.reloadingAgentEnabled}</li>
+				<li>Controllers: ${grailsApplication.controllerClasses.size()}</li>
+				<li>Domains: ${grailsApplication.domainClasses.size()}</li>
+				<li>Services: ${grailsApplication.serviceClasses.size()}</li>
+				<li>Tag Libraries: ${grailsApplication.tagLibClasses.size()}</li>
+			</ul>
+			<h1>Installed Plugins</h1>
+			<ul>
+				<g:each var="plugin" in="${applicationContext.getBean('pluginManager').allPlugins}">
+					<li>${plugin.name} - ${plugin.version}</li>
+				</g:each>
+			</ul>
 		</div>
 		<footer class="main-footer">
 			<g:img dir="img" file="envato.png" style="height:30px;" />

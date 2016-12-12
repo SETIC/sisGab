@@ -1,4 +1,4 @@
-package br.gov.rn.saogoncalo.cadastroGabinete
+package br.gov.rn.saogoncalo.administracaoSeguranca
 
 import grails.test.mixin.TestFor
 import spock.lang.Specification
@@ -6,8 +6,8 @@ import spock.lang.Specification
 /**
  * See the API for {@link grails.test.mixin.web.ControllerUnitTestMixin} for usage instructions
  */
-@TestFor(NomeacaoController)
-class NomeacaoControllerSpec extends Specification {
+@TestFor(LoginController)
+class LoginControllerSpec extends Specification {
 
     def setup() {
     }

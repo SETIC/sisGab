@@ -2,7 +2,8 @@
 <html lang="pt-br">
   <head>
     <meta charset="UTF-8">
-    <title>SISGAB</title>
+
+    <title>SISOS</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <link rel="shortcut icon" href="${resource(dir:'images', file:'favicon.ico')}" type="image/x-icon" />
     <!-- Bootstrap 3.3.2 -->
@@ -47,7 +48,8 @@
     <div id="wrap">  
       <div class="login-box">
         <div class="login-logo">
-          <a href="http://189.43.7.23:8080/sisGab/nomeacao/login"><g:img style="width: 30%" dir="images" file="sga.png"/></a>
+
+          <a href="http://189.43.7.23:8080/sisGab/login/login"><g:img style="width: 50%" dir="images" file="sga.png"/></a>
         </div><!-- /.login-logo -->
         <div class="login-box-body">
           <p class="login-box-msg">Entre para iniciar a sua sessão</p>
