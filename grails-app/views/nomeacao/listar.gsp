@@ -7,7 +7,6 @@
 <title>SISGAB</title>
 <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
 </head>
-
 <body>
 
 
@@ -35,8 +34,35 @@
 			
 			<script>
 
+         
+			function changeIdMatriculaParaRelatorio(idMatricula){
+				document.getElementById("idMatriculaParaRelatorio").value = idMatricula;
+			} 
 
-			function printDiv(id)
+			function geraRelatorio(){
+				
+				var idMatricula = document.getElementById("idMatriculaParaRelatorio").value;
+			    var cod = document.getElementById("tipoRelatorio").value;
+			
+			switch (cod){
+			case '1':
+				printDivPortaria()
+				break;
+				
+			case '2':
+				printDivExoneracao()
+				break;
+						
+			default:
+				break;
+				
+			}
+		
+				}
+			
+
+
+			function printDiv()
 			{
 			  var divToPrint=document.getElementById(id);
 			  newWin= window.open("");
@@ -86,21 +112,104 @@
 			  newWin.close();
 			}
 
-			function printDivPortaria(id) {
-
+			function printDivPortaria() {
 				var endereco = "${request.getRequestURL().substring(6, request.getRequestURL().indexOf(':8080/'))}";
+				var idMatricula = document.getElementById("idMatriculaParaRelatorio").value;
+				
 				  $.ajax({
 			            type: "GET",
-			            url: "http://"+endereco+":8080/sisGab/nomeacao/getDadosPortaria/"+id,
+			            url: "http://"+endereco+":8080/sisGab/nomeacao/getDadosPortaria/"+idMatricula,
 			            dataType: "json",
 			            success: function(result){
 			            	var dataFormatada = result.dataNomeacao.toString().substring(8,10) + " / " + result.dataNomeacao.toString().substring(5,7) + " / " + result.dataNomeacao.toString().substring(0,4);
+                            newWin= window.open("");
+			            	newWin.document.write("<table style='font-size:17px;'>");
+			            	newWin.document.write("<tbody>");
+			            	newWin.document.write("<tr>");
+						    newWin.document.write("<td><img src='${request.getRequestURL().substring(0, request.getRequestURL().indexOf('sisGab/'))}sisGab/static/images/sga.png'; style='width:100px; float:left; margin-top:5px;'> </td>");
+			            	newWin.document.write("<td colspan='2'>RIO GRANDE DO NORTE <br /> PREFEITURA MUNICIPAL DE S&Atilde;O GON&Ccedil;ALO DO AMARANTE - RN<br />"); 
+			            	newWin.document.write("GABINETE DO PREFEITO <br/> Centro administrativo &agrave; Rua Alexandre Cavalcante, S/N CEP 59.290-000.<br /> CNPJ/MF 08.079.402/0001-35</td>");
+			            	newWin.document.write("</tr>");
+			            	newWin.document.write("<tr>");
+			            	newWin.document.write("<td colspan='2'>");
+			            	//newWin.document.write("</br>");
+			            	//newWin.document.write("</br>");
+			            	
+			            	newWin.document.write("<p>&nbsp;PORTARIA "+result.portaria+"  , DE " +dataFormatada+ "</p>");
+			            	newWin.document.write("</br>");
+			            	newWin.document.write("</td>");
+			            	newWin.document.write("</tr>");
+			            	newWin.document.write("<tr>");
+			            	newWin.document.write("<td style='padding-left: 500px;' colspan='3'>&nbsp; Nomeia " + result.cargo);
+			            	newWin.document.write("</br>");
+			            	newWin.document.write("</br>");
+			            	
+			            	newWin.document.write("</td>");
+			            	
+			            	
+			            	newWin.document.write("</tr>");
+			            		            	
+			            	newWin.document.write("<tr>");
+			            	
+			            	newWin.document.write("<td colspan='3'>");
+			            	newWin.document.write("<p style='text-align: justify;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;O PREFEITO MUNICIPAL DE"); 
+			            	newWin.document.write("S&Atilde;O GON&Ccedil;ALO DO AMARANTE/RN, &nbsp;no uso&nbsp;de suas atribui&ccedil;&otilde;es legais, estabelecidas na Lei"); 
+			            	newWin.document.write("Org&acirc;nica do munic&iacute;pio, e em observ&acirc;ncia&nbsp;da Lei Complementar n&ordm; 69/2015, que disp&otilde;e sobre");
+			            	newWin.document.write(" a reestrutura&ccedil;&atilde;o organizacional do&nbsp;Poder Executivo do Munic&iacute;pio de S&atilde;o Gon&ccedil;alo do Amarante,</p>"); 
+			            	newWin.document.write("</br>");
+			      			newWin.document.write("<p style='text-align: justify;'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; RESOLVE:</p>");
+			      			newWin.document.write("</br>");
+			            	newWin.document.write("</br>");
+			            	newWin.document.write("<p style='text-align: justify;'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Art. 1&ordm; - Nomear &nbsp;"+result.nome +", para "); 
+			            	newWin.document.write(" exercer o cargo de "+result.cargo+" do(a) &nbsp;"+result.secretaria+".</p>");
+			            	newWin.document.write("</br>");
+			            	newWin.document.write("</br>");
+			            	
+			            	newWin.document.write("<p style='text-align: justify;'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;Art. 2&ordm; - Esta Portaria entra em vigor na data"); 
+			            	newWin.document.write("da sua publica&ccedil; &atilde; o,retroagindo os&nbsp; seus efeitos a " + dataFormatada+ " .</p>");
+			            	newWin.document.write("</br>");
+			            	newWin.document.write("</br>");
+			            	newWin.document.write("<p style='text-align: justify;'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;Art. 3&ordm; - Revogam-se as ");
+			            	newWin.document.write("disposi&ccedil;&otilde;es em contr&aacute;rio.</p>");
+			            	
+			            	
+			            	newWin.document.write("<p style='text-align: justify;'>PREFEITURA MUNICIPAL DE S&Atilde;O GON&Ccedil;ALO DO AMARANTE/RN ,"); 
+			            	newWin.document.write("<style='text-align: justify;'> GABINETE DO PREFEITO , EM  " + dataFormatada + "</p>");
+			            	newWin.document.write("<p>&nbsp;</p>");
+			            	newWin.document.write("<p style='text-align: center;'>_______________________________</p>");
+			            	newWin.document.write("<p style='text-align: center;'>JAIME CALADO PEREIRA DOS SANTOS</p> ");
+			            	newWin.document.write("<p style='text-align: center;'>PREFEITO MUNICIPAL</p>");
+			            	newWin.document.write("</td></tr><tr>");
+			            	newWin.document.write("<td colspan='3'>&nbsp;</td>");
+			            	newWin.document.write("</tr>");
+			            	newWin.document.write("</tbody>");
+			            	newWin.document.write("</table>");
+						    newWin.print();
+						    newWin.close();
+						            }
+			            });
+		            
+				  
+			}
+
+
+			function printDivExoneracao() {
+
+				var endereco = "${request.getRequestURL().substring(6, request.getRequestURL().indexOf(':8080/'))}";
+				var idMatricula = document.getElementById("idMatriculaParaRelatorio").value;
+				
+				  $.ajax({
+			            type: "GET",
+			            url: "http://"+endereco+":8080/sisGab/nomeacao/getDadosPortaria/"+idMatricula,
+			            dataType: "json",
+			            success: function(result){
+			            var dataFormatada = result.dataNomeacao.toString().substring(8,10) + " / " + result.dataNomeacao.toString().substring(5,7) + " / " + result.dataNomeacao.toString().substring(0,4);
 							
 			    //var divToPrint=document.getElementById(id);
 			    newWin= window.open("");
 			    newWin.document.write("<table>");
 			    newWin.document.write("<tr>");
-			    newWin.document.write("<td>");
+			    newWin.document.write("<td><img src='${request.getRequestURL().substring(0, request.getRequestURL().indexOf('sisGab/'))}sisGab/static/images/sga.png'; style='width:100px; float:left; margin-top:9px;'> </td>");
 			    newWin.document.write("</td>");
 			    newWin.document.write("<td>");
 			    newWin.document.write("<p style='text-align:left;font-weight: bold; '>RIO GRANDE DO NORTE</p>");
@@ -113,11 +222,11 @@
 				newWin.document.write("</tr>");
 				newWin.document.write("</table>");
 				newWin.document.write("<p style='text-align:left; '>PORTARIA "+ result.portaria + " , DE "+dataFormatada+ " .</p>");
-				newWin.document.write("<p style='text-align:right; '>Nomeia "+ result.nome +" .</p>");
+				newWin.document.write("<p style='text-align:right; '>Exonera "+ result.cargo +" .</p>");
 				newWin.document.write("<p style='text-align:justify; '> O PREFEITO MUNICIPAL DE SÃO GONÇALO DO AMARANTE/RN,  no uso");
 				newWin.document.write(" de suas atribuições legais,estabelecidas na Lei Orgânica do município, e em observância");
-				newWin.document.write(" da Lei Complementar nº 69/2015,que dispõe sobre a reestruturação organizacional do ");
-				newWin.document.write("Poder Executivo do Município de São Gonçalo do Amarante,</p> ");
+				newWin.document.write(" da Lei Complementar nº 69/2015, que dispõe sobre a reestruturação organizacional do ");
+				newWin.document.write(" Poder Executivo do Município de São Gonçalo do Amarante,</p> ");
 				newWin.document.write("</br>");
 				newWin.document.write(" RESOLVE: ");
 				newWin.document.write("</br>");
@@ -125,7 +234,8 @@
 				newWin.document.write("</br>");
 				newWin.document.write(" ");
 				newWin.document.write(" ");
-				newWin.document.write("Art. 1º - Nomear  "+result.nome +", para exercer o cargo de "+result.cargo+" ");
+				newWin.document.write("Art. 1º - Exonerar  "+result.nome +" do cargo de "+result.cargo+ " ");
+				newWin.document.write("da " +result.secretaria + "," + " em exercicio na(o) "  +result.lotacao);
 				newWin.document.write("</br>");
 				newWin.document.write("</br>");
 				newWin.document.write("</br>");
@@ -137,7 +247,6 @@
 				newWin.document.write("Art. 3º - Revogam-se as disposições em contrário.");
 				newWin.document.write("</br>");
 				newWin.document.write("</br>");
-				
 				newWin.document.write("<p style=text-align:left;>PREFEITURA MUNICIPAL DE SÃO GONÇALO DO AMARANTE/RN , GABINETE DO PREFEITO , EM "+ dataFormatada + "</p>");
 				//newWin.document.write("</br>");
 			    //newWin.document.write("<p style=text-align:left;>GABINETE DO PREFEITO , EM "+ dataFormatada + " "+"</p>");
@@ -149,11 +258,12 @@
 				  newWin.print();
 				  newWin.close();
 
-			            }
+			               }
 			            });
-		            
-				  
-			}
+			       }
+
+
+			
 
 
 			
@@ -212,11 +322,9 @@
 							<th style="text-align: left; padding-left: 10px;">Funcionario</th>
 							<th style="text-align: left; padding-left: 10px;">Secretaria</th>
 							<th style="text-align: left; padding-left: 10px;">Cargo</th>
-
 							<th style="text-align: left; padding-left: 10px;">Tipo</th>
-							<th style="text-align: left; padding-left: 10px;">Data de Emissão</th>
+							<th style="text-align: left; padding-left: 10px;">Data de Nomeação</th>
 							<th style="text-align: left; padding-left: 10px;">Portaria</th>
-							<th style="text-align: left; padding-left: 10px;">Ativo</th>
 							<th style="text-align: left; padding-left: 10px;">Funções</th>
 						</tr>
 					</thead>
@@ -248,11 +356,6 @@
 									${it.portaria}
 																 
 								</td>
-								
-								<td>
-									${it.ativo}
-								</td>
-
 								<td>
 									<div class="opcoes">
 										<div style="display: inline">
@@ -262,37 +365,70 @@
 														<i class="fa fa-pencil"></i>
 												</span></a>
 											</div>
+											<div data-toggle="modal" data-target="#relatorioModal"
+												onclick="changeIdMatriculaParaRelatorio(${it.id});"
+												title="Declarações"
+												class="btn btn-warning btn-xs btn-flat"><span
 
-											<%--<div title="Remover" onclick="deletar(${it.id})"
-												class="btn btn-danger btn-xs btn-flat">
-												<span class="fa fa-times"></span>
-											</div> 	--%>
-											
-											<div class="btn btn-success btn-xs btn-flat"><a
-												style="color: #fff" title="Ver informaçoes"
-												href="/sisGab/nomeacao/info/${it.id}"><span
-													class="fa fa-eye"></span></a>
-											</div>
-											<input type="hidden" id="idNomeacao" />
-											
-											<div title="Nomeacao" onclick="printDivPortaria(${it.id});"
-											   
-												class="btn btn-warning	btn-xs btn-flat ">
-												<span class="fa fa-list"></span>
-											</div> 	
-											
-											<div title="Exoneração" onclick="printDivPortaria(${it.id});"
-											   
-												class="btn btn-warning	btn-xs btn-flat ">
-												<span class="fa fa-list"></span>
-											</div> 	
+												class="glyphicon glyphicon-file"></span></div>
 										</div>
-									</div>
+											
+                                      </div>
+							
+		
+											
+											
+											
+											
+										<div title="Nomeacao" onclick="printDivPortaria(${it.id});"
+											   
+												class="btn btn-warning	btn-xs btn-flat ">
+												<span class="fa fa-list"></span>
+											</div> 	
+											
+											<div title="Exoneração" onclick="printDivExoneracao(${it.id});"
+											   
+												class="btn btn-warning	btn-xs btn-flat ">
+												<span class="fa fa-file"></span>
+											</div> 	
 								</td>
 							</tr>
 						</g:each>
 					</tbody>
 				</table>
+				<div class="modal fade" id="relatorioModal" tabindex="-1"
+				role="dialog" aria-labelledby="relatorioModalLabel"
+				aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">
+								<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+							</button>
+							<h4 class="modal-title" id="relatorioModalLabel">Relatórios</h4>
+						</div>
+						<div class="modal-body">
+							<form action="" method="POST">
+								<div class="form-heading">
+									<input type="hidden" id="idMatriculaParaRelatorio" /> <label>Tipo
+										de Relatório</label>
+									<div class="controls">
+										<select class="form-control selectpicker" name="tipoRelatorio"
+											id="tipoRelatorio">
+											<option value="1">Portaria</option>
+											<option value="2">Exoneração</option>
+										</select> <br /> <br /> <br />
+										<button class="btn btn-danger btn-flat"
+											onclick="geraRelatorio(); return false;">
+											<i class="fa fa-print"></i> Gerar Relatório
+										</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
 			</section>
 
 
@@ -321,8 +457,7 @@
 						<div class="modal-body">
 							<g:form controller="nomeacao" action="salvar" class="form">
 								<fieldset>
-								<%--<script type="text/javascript" src="/sisGab/js/mudarSecretaria.js"></script>
-									--%><div class="form-heading">
+								<div class="form-heading">
 										<label>Secretaria</label>
 										<div class="controls ">
 
@@ -345,8 +480,6 @@
 											<select class="form-control" data-live-search="true" name="cargo" id="comboCargo" required="true">
 												</select>
 												
-											</select>
-
 										</div>
 									</div>
 									<br>
@@ -393,14 +526,11 @@
 									<div class="form-heading">
 										<label>Efetivo</label>
 										<div class="controls">
-											<%--<g:checkBox name="efetivo" value="false" />
-											--%>
 											<input type="radio" name="efetivo" value="true" > Sim<br>
   											<input type="radio" name="efetivo" value="false" checked> Não<br>
 										</div>
 									</div>
 									<br>
-									
 									
 								</fieldset>
 								<div class="modal-footer">
@@ -410,18 +540,13 @@
 									<input type="reset" class="btn btn btn-flat" value="Limpar">
 								</div>
 							</g:form>
-							
-						</div>
+					  </div>
 					</div>
 				</div>
 			</div>
-       </section>
-   </body>
+	 </section>
+  </body>
 </html>
-
-
-
-
 
 
 

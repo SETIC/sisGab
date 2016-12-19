@@ -280,8 +280,8 @@ class NomeacaoController {
 			" and   tp.id = c.tipoCargo.id "
 		 +  " and   n.id = ? " , [id])
 		
-		def result = ["portaria":nomeacao.portaria, "cargo":nomeacao?.secretariaCargo.cargo.cargo, "nome":nomeacao.funcionario.nome, "dataNomeacao":nomeacao.dataNomeacao ]
-		
+		def result = ["portaria":nomeacao.portaria, "cargo":nomeacao?.secretariaCargo.cargo.cargo, "nome":nomeacao.funcionario.nome, "dataNomeacao":nomeacao.dataNomeacao , "secretaria":nomeacao.secretariaCargo.secretaria.secretaria, "lotacao":nomeacao.funcionario.lotacao]
+	
 		render(result as JSON)
 		
 	}
