@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>Sistema de solicitação de chamados . Painel"></title>
+<title>Sistema de controle de Nomeações . Painel"></title>
 <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
 
 <!-- Bootstrap 3.3.2 -->

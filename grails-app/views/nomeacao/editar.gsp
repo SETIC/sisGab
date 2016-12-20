@@ -9,13 +9,15 @@
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
-	<div class="wrapper">
+
 		<!-- Content Wrapper. Contains page content -->
-		<div class="content-wrapper">
 			<!-- Content Header (Page header) -->
+
 
 				<!-- CORPO DA PÁGINA -->
 				<section class="content">
+				
+				
 					<g:if test="${ok}">
 						<div class="alert alert-success">
 							${ok}
@@ -40,13 +42,12 @@
 								<div class="form-heading">
 									<label>Secretaria</label>
 									<div class="controls ">
-
 										<select class="form-control selectpicker"
 											data-live-search="true" name="secretaria" 
 											id="comboSecretaria" onchange="mudarSecretaria();">
 											<g:each in="${secretariaDisponivel}">
-
-												<option value="${it.id}">
+												
+												<option value="${it.id}" <g:if test="${nomeacaoEdit.secretariaCargo.secretaria.id == it.id}"> selected </g:if> >
 													${it.secretaria}
 												</option>
 											</g:each>
@@ -58,11 +59,29 @@
 								<div class="form-heading">
 									<label>Cargo</label>
 									<div class="controls ">
-
-										<select class="form-control" data-live-search="true"
+									<g:set var="t" value="0" />
+																			
+									<select class="form-control" data-live-search="true"
 											name="cargo" id="comboCargo">
-										</select> </select>
-
+							
+										<g:each in="${cargosSecretaria}">
+												
+											<option value="${it.id}" <g:if test="${nomeacaoEdit.secretariaCargo.id == it.id}">${t='1'} selected </g:if> >
+												${it.cargo.cargo}
+											</option>
+										</g:each>
+										
+										<g:if test="${t == '0'}">
+											
+											<option value="${nomeacaoEdit.secretariaCargo.cargo.id}" selected>${nomeacaoEdit.secretariaCargo.cargo.cargo}</option>	
+										</g:if>	
+										<g:else>
+											${t = '0'}
+										</g:else>
+										
+									</select>
+									
+										
 									</div>
 								</div>
 								<br>
@@ -97,10 +116,11 @@
 										<select class="form-control selectpicker"
 											data-live-search="true" name="lotacao" id="comboLotacao">
 											<g:each in="${secretaria}">
-												<option value="${it.secretaria}">
+												<option value="${it.secretaria}" <g:if test="${nomeacaoEdit.secretariaCargo.secretaria.secretaria == it.secretaria}"> selected </g:if> >
 													${it.secretaria}
 												</option>
 											</g:each>
+											
 										</select>
 									</div>
 								</div>
@@ -173,10 +193,12 @@
 						</g:form>
 					</div>
 
+			</section>
 
-				</section>
-		</div>
-	</div>
+				
+
+
+
 </body>
 </html>
 

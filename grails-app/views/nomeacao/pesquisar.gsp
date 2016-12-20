@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<title>Protocolo . Módulo Protocolo</title>
+<title>Nomeacão . Módulo Pesquisa</title>
 <meta name="layout" content="public" />
 </head>
 <body>
@@ -79,6 +79,9 @@
 		}
         
 		</script>
+		
+			<section class="content">
+		
 	    <section class="content-header">
 		<h1>
 			Nomeações <small>Consulta de Nomeações</small>
@@ -105,7 +108,7 @@
 			</g:form>
 		</section>
 	<!-- CORPO DA PÁGINA -->
-	<section class="content">
+
 		<div>
 			<g:if test="${ok}">
 				<div class="alert alert-success">
@@ -123,35 +126,19 @@
 					class="table table-striped table-hover example">
 					<thead>
 						<tr>
-							<th style="width:60px;padding-left:60px">Funções</th>
 							<th>Nome</th>
 							<th>Secretaria</th>
 							<th>Cargo</th>
 							<th>Data de Nomeacao</th>
 							<th>Portaria</th>
 							<th>Ativo</th>
+							<th style="width:60px;padding-left:60px">Funções</th>
 						</tr>
 					</thead>
 					<tbody>
 						<g:each in='${nomeacao?}'>
 							<tr class='linha_registro'>
-								<td>
-									<div style="margin-left: 10px" class="opcoes">
-										<ul style="display: inline">
-											<li title="Ver detalhes do protocolo"
-												class="btn btn-success btn-xs btn-flat"><a
-												style="color: #fff"
-												href="/sisGab/nomeacao/info/${it.id}"><span
-													class="fa fa-times"></span></a></li> 
-																					
-												<li title="Editar Nomeacao" class="btn btn-primary btn-xs btn-flat"><a
-													style="color: #fff"
-													href="/sisGab/nomeacao/editar/${it.id}"><span
-														class="fa fa-pencil"></span></a></li>
-										
-										</ul>
-									</div>
-								</td>
+								
 								<td>
 									${it.funcionario?.nome}
 								</td>
@@ -172,6 +159,24 @@
 								<td>
 									${it.ativo}
 								</td>
+								<td>
+									<div style="margin-left: 10px" class="opcoes">
+										<ul style="display: inline">
+											<li title="Ver detalhes do protocolo"
+												class="btn btn-success btn-xs btn-flat"><a
+												style="color: #fff"
+												href="/sisGab/nomeacao/info/${it.id}"><span
+													class="fa fa-eye"></span></a></li> 
+																					
+												<li title="Editar Nomeacao" class="btn btn-primary btn-xs btn-flat"><a
+													style="color: #fff"
+													href="/sisGab/nomeacao/editar/${it.id}"><span
+														class="fa fa-pencil"></span></a></li>
+										
+										</ul>
+									</div>
+								</td>
+								
 							</tr>
 						</g:each>
 					</tbody>

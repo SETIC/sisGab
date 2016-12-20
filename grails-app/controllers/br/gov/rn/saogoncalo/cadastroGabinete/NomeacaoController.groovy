@@ -53,6 +53,9 @@ class NomeacaoController {
 			funcionario.lotacao = params.lotacao
 			funcionario.nome = params.nome
 
+			def portaria = Nomeacao.findByPortaria(params.portaria)
+			if (portaria == null){
+			
 			if (funcionario.save(flush:true)){
 
 				Nomeacao nomeacao = new Nomeacao(params)
@@ -61,15 +64,18 @@ class NomeacaoController {
 				nomeacao.funcionario = funcionario
 				nomeacao.secretariaCargo = secretariaCargo
 				nomeacao.portaria = params.portaria
-
+								
 				if (nomeacao.save(flush:true)){
 					redirect(action:"listar", params:[msg:"Cadastrado com sucesso", tipo:"ok"])
 				}else{
 					redirect(action:"listar", params:[msg:"Erro ao cadastrar", tipo:"erro"])
 				}
 			}else{
-				redirect(action:"listar", params:[msg:"Erro ao cadastrar", tipo:"erro"])
+				redirect(action:"listar", params:[msg:"Erro ao cadastrar.", tipo:"erro"])
 			}
+		}else{
+		redirect(action:"listar", params:[msg:"Erro ao cadastrar", tipo:"erro"])
+	}
 		}
 	}
 
@@ -78,12 +84,12 @@ class NomeacaoController {
 			render (view:"/login/login.gsp", model:[ctl:"nomeacao", act:"listar"])
 		}else{
 
-
+			Nomeacao nomeacaoEdit = Nomeacao.get(id)
+		
 			def nomeacao = Nomeacao.executeQuery("select n from Nomeacao n " +
 					" where n.ativo = true")
 
 			def secretaria = Secretaria.findAllByAtivo("true")
-
 
 			def secretariaDisponivel = Secretaria.executeQuery(" select distinct ss from SecretariaCargo scc, Secretaria ss " +
 					"  where ss.id = scc.secretaria.id " +
@@ -97,11 +103,23 @@ class NomeacaoController {
 					" having ( sc.quantidade - count(*))=0 ) ")
 
 			def cargo = Cargo.findAllByAtivo("true")
+			
+			def cargosSecretaria = SecretariaCargo.executeQuery(" select scc from SecretariaCargo scc, Secretaria ss, Cargo cc " +
+				" where ss.id = scc.secretaria.id " +
+				"  and cc.id = scc.cargo.id " +
+				"   and scc.id not in ( select sc.id " +
+				"			 from Nomeacao n, Cargo c, " +
+				"			      SecretariaCargo sc, Secretaria s " +
+				"			where sc.cargo.id = c.id " +
+				"		          and n.secretariaCargo.id = sc.id " +
+				"			  and sc.secretaria.id = s.id " +
+				"             and s.id = ? " +
+				"			group by sc.id, s.id, c.id " +
+				" 	       having ( sc.quantidade - count(*))=0 ) " +
+				" and ss.id = ?",[nomeacaoEdit.secretariaCargo.secretaria.id.toLong(), nomeacaoEdit.secretariaCargo.secretaria.id.toLong()])
 
-			Nomeacao nomeacaoEdit = Nomeacao.get(id)
 
-
-			render (view:"/nomeacao/editar.gsp", model:[nomeacao:nomeacao, secretaria:secretaria, cargo:cargo, secretariaDisponivel:secretariaDisponivel, nomeacaoEdit:nomeacaoEdit])
+			render (view:"/nomeacao/editar.gsp", model:[nomeacao:nomeacao, secretaria:secretaria, cargo:cargo, secretariaDisponivel:secretariaDisponivel, nomeacaoEdit:nomeacaoEdit, cargosSecretaria:cargosSecretaria])
 		}
 	}
 	
@@ -277,7 +295,7 @@ class NomeacaoController {
 			" and   tp.id = c.tipoCargo.id "
 		 +  " and   n.id = ? " , [id])
 		
-		def result = ["portaria":nomeacao.portaria, "cargo":nomeacao?.secretariaCargo.cargo.cargo, "nome":nomeacao.funcionario.nome, "dataNomeacao":nomeacao.dataNomeacao ]
+		def result = [lotacao:nomeacao?.funcionario.lotacao, secretaria:nomeacao?.secretariaCargo.secretaria.secretaria, "portaria":nomeacao?.portaria, "cargo":nomeacao?.secretariaCargo.cargo.cargo, "nome":nomeacao.funcionario.nome, "dataNomeacao":nomeacao.dataNomeacao ]
 		
 		render(result as JSON)
 		

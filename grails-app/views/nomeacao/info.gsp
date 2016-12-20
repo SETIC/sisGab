@@ -81,6 +81,13 @@ function printDiv(id)
 						</div>
 						<br>
 						<div class="form-group">
+							<label for="turma" class="col-sm-2 control-label">Remuneração</label>
+							<div class="col-sm-3">
+								${it.secretariaCargo.cargo.tipoCargo.remuneracao}
+							</div>
+						</div>
+						<br>
+						<div class="form-group">
 							<label for="vagas" class="col-sm-2 control-label">Funcionário</label>
 							<div class="col-sm-3">
 								${it.funcionario.nome}
@@ -113,7 +120,12 @@ function printDiv(id)
 						<div class="form-group">
 							<label for="serie" class="col-sm-2 control-label">Efetivo</label>
 							<div class="col-sm-4">
-								${it.funcionario.efetivo}
+							 	<g:if test="${it.funcionario.efetivo == true}">
+							 		Sim
+							 	</g:if>
+							 	<g:else>
+							 		Não
+							 	</g:else>
 							</div>
 						</div>
 						<br>
