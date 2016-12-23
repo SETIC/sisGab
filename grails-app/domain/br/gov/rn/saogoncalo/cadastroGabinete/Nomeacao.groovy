@@ -3,6 +3,7 @@ package br.gov.rn.saogoncalo.cadastroGabinete
 class Nomeacao {
 	 
 	 Date dataNomeacao
+	 Date dataGeracaoDePortaria
 	 boolean ativo
 	 String portaria
 	 
@@ -13,6 +14,7 @@ class Nomeacao {
 		dataNomeacao nullable:false, blank:false
 		ativo  nullable:false, blank:false
 		portaria nullable:false, blank:false
+		dataGeracaoDePortaria nullable:true
 	
     }
 	static mapping = {
