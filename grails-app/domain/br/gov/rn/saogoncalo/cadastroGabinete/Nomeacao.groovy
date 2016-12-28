@@ -5,6 +5,7 @@ class Nomeacao {
 	 Date dataNomeacao
 	 boolean ativo
 	 String portaria
+	 Date dataGeracaoDePortaria
 	 
 	static belongsTo = [funcionario:Funcionario , secretariaCargo:SecretariaCargo]
 	 
@@ -13,6 +14,7 @@ class Nomeacao {
 		dataNomeacao nullable:false, blank:false
 		ativo  nullable:false, blank:false
 		portaria nullable:false, blank:false
+		dataGeracaoDePortaria nullable:true
 		
     }
 	static mapping = {

@@ -192,7 +192,11 @@
 			  <li class="active treeview">
 			    <li><a href="/sisGab/nomeacao/pesquisar">
 			  <i class="fa fa-search"></i> <span>Pesquisar</span></a></li>
-			  <li><g:link controller="Login" action="logout"><i class="fa fa-circle-o text-red"></i>
+			  
+			  <li><a href="/sisGab/secretariaCargo/listar">
+              <i class="fa fa-newspaper-o"></i> <span> Cargos </span></a></li>
+			  
+			  <li><g:link controller="Login" action="logout"><i class="fa fa-circle-o"></i>
 				<span>Sair</span></g:link></li>
              </ul>
         </section>

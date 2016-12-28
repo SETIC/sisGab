@@ -125,6 +125,24 @@
 									</div>
 								</div>
 								<br>
+								
+								<div class="form-heading">
+								<label> Data da Geração da Portaria</label>
+								<div class="controls">
+									<g:datePicker noSelection="['':'']" precision="day"
+										class="form-control" required="true" name="dataGeracaoDePortaria" value="${nomeacaoEdit.dataGeracaoDePortaria}" />
+									</div>
+								</div>
+								<br>
+								
+								<div class="form-heading">
+								<label> Data de Nomeação</label>
+								<div class="controls">
+									<g:datePicker noSelection="['':'']" precision="day"
+										class="form-control" required="true" name="dataNomeacao" value="${nomeacaoEdit.dataNomeacao}" />
+									</div>
+								</div>
+								<br>
 
 								<div class="form-heading">
 									<label>Efetivo</label>

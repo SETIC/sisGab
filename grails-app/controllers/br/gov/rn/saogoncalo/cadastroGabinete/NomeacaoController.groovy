@@ -64,6 +64,7 @@ class NomeacaoController {
 				nomeacao.funcionario = funcionario
 				nomeacao.secretariaCargo = secretariaCargo
 				nomeacao.portaria = params.portaria
+				nomeacao.dataGeracaoDePortaria = params.dataGeracaoDePortaria
 								
 				if (nomeacao.save(flush:true)){
 					redirect(action:"listar", params:[msg:"Cadastrado com sucesso", tipo:"ok"])
@@ -295,7 +296,7 @@ class NomeacaoController {
 			" and   tp.id = c.tipoCargo.id "
 		 +  " and   n.id = ? " , [id])
 		
-		def result = [lotacao:nomeacao?.funcionario.lotacao, secretaria:nomeacao?.secretariaCargo.secretaria.secretaria, "portaria":nomeacao?.portaria, "cargo":nomeacao?.secretariaCargo.cargo.cargo, "nome":nomeacao.funcionario.nome, "dataNomeacao":nomeacao.dataNomeacao ]
+		def result = [lotacao:nomeacao?.funcionario.lotacao, secretaria:nomeacao?.secretariaCargo.secretaria.secretaria, "portaria":nomeacao?.portaria, "cargo":nomeacao?.secretariaCargo.cargo.cargo, "nome":nomeacao.funcionario.nome, "dataNomeacao":nomeacao.dataNomeacao, "dataGeracaoDePortaria":nomeacao.dataGeracaoDePortaria ]
 		
 		render(result as JSON)
 		
