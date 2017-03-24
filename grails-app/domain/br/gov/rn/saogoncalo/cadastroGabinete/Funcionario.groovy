@@ -11,7 +11,7 @@ class Funcionario {
     static constraints = {
 		
 	nome nullable:false, blank:false
-	cpf unique:true, nullable:false, blank:false
+	cpf nullable:true, blank:true
 	efetivo  nullable:false, blank:false
 	lotacao nullable:false, blank:false
   }

@@ -157,7 +157,14 @@
 								</td>
 								
 								<td>
-									${it.ativo}
+									
+									<g:if test="${it.ativo == true}">
+										Sim
+									</g:if>
+									<g:else>
+										Não
+									</g:else>
+									
 								</td>
 								<td>
 									<div style="margin-left: 10px" class="opcoes">

@@ -9,14 +9,15 @@ class NomeacaoController {
 
 	def listar(){
 
-		if(session["user"] != null){
+		if((session["user"] == null) || (session["pass"] == null) ){
+			render (view:"/login/login.gsp", model:[ctl:"nomeacao", act:"salvar"])
+		}else{
 
 
 			def nomeacao = Nomeacao.executeQuery("select n from Nomeacao n " +
 					" where n.ativo = true")
 
 			def secretaria = Secretaria.findAllByAtivo("true")
-
 
 			def secretariaDisponivel = Secretaria.executeQuery(" select distinct ss from SecretariaCargo scc, Secretaria ss " +
 					"  where ss.id = scc.secretaria.id " +
@@ -32,8 +33,7 @@ class NomeacaoController {
 			def cargo = Cargo.findAllByAtivo("true")
 
 			render(view:"/nomeacao/listar.gsp", model:[nomeacao:nomeacao, secretaria:secretaria, cargo:cargo, secretariaDisponivel:secretariaDisponivel])
-		}else{
-			render(view:"/index.gsp")
+		
 		}
 	}
 
@@ -48,7 +48,12 @@ class NomeacaoController {
 			SecretariaCargo secretariaCargo = SecretariaCargo.get(params.cargo)
 
 			Funcionario funcionario = new Funcionario()
-			funcionario.cpf = params.cpf
+			if (params.cpf != null) {
+				funcionario.cpf = params.cpf
+			}else{
+				funcionario.cpf = ""
+			}
+			
 			funcionario.efetivo = params.efetivo
 			funcionario.lotacao = params.lotacao
 			funcionario.nome = params.nome
@@ -120,7 +125,8 @@ class NomeacaoController {
 				" and ss.id = ?",[nomeacaoEdit.secretariaCargo.secretaria.id.toLong(), nomeacaoEdit.secretariaCargo.secretaria.id.toLong()])
 
 
-			render (view:"/nomeacao/editar.gsp", model:[nomeacao:nomeacao, secretaria:secretaria, cargo:cargo, secretariaDisponivel:secretariaDisponivel, nomeacaoEdit:nomeacaoEdit, cargosSecretaria:cargosSecretaria])
+			render (view:"/nomeacao/editar.gsp", model:[nomeacao:nomeacao, secretaria:secretaria, cargo:cargo, secretariaDisponivel:secretariaDisponivel, 
+				                                        nomeacaoEdit:nomeacaoEdit, cargosSecretaria:cargosSecretaria])
 		}
 	}
 	
@@ -146,9 +152,11 @@ class NomeacaoController {
 						
 						nomeacao.ativo = params.ativo.toBoolean()
 						//nomeacao.dataNomeacao = new Date()
+						nomeacao.dataNomeacao = params.dataNomeacao
 						nomeacao.funcionario = funcionario
 						nomeacao.secretariaCargo = secretariaCargo
 						nomeacao.portaria = params.portaria
+						nomeacao.dataGeracaoDePortaria = params.dataGeracaoDePortaria
 		
 						if (nomeacao.save(flush:true)){
 							redirect(action:"listar", params:[msg:"Cadastrado com sucesso", tipo:"ok"])
@@ -296,7 +304,9 @@ class NomeacaoController {
 			" and   tp.id = c.tipoCargo.id "
 		 +  " and   n.id = ? " , [id])
 		
-		def result = [lotacao:nomeacao?.funcionario.lotacao, secretaria:nomeacao?.secretariaCargo.secretaria.secretaria, "portaria":nomeacao?.portaria, "cargo":nomeacao?.secretariaCargo.cargo.cargo, "nome":nomeacao.funcionario.nome, "dataNomeacao":nomeacao.dataNomeacao, "dataGeracaoDePortaria":nomeacao.dataGeracaoDePortaria ]
+		def result = ["lotacao":nomeacao?.funcionario.lotacao, "secretaria":nomeacao?.secretariaCargo.secretaria.secretaria, 
+			          "portaria":nomeacao?.portaria, "cargo":nomeacao?.secretariaCargo.cargo.cargo, "nome":nomeacao.funcionario.nome, 
+					  "dataNomeacao":nomeacao.dataNomeacao, "dataGeracaoDePortaria":nomeacao.dataGeracaoDePortaria ]
 		
 		render(result as JSON)
 		

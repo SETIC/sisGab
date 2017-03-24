@@ -11,27 +11,25 @@
 <body>
 
 
-			<g:if test="${params.tipo == 'ok'}">
-				<div class="alert alert-success">
-					${params.msg}
-				</div>
-			</g:if>
-			<g:if test="${params.tipo == 'erro'}">
-				<div class="alert alert-danger">
-					${params.msg} 
-				</div>
-			</g:if>
-	
+	<g:if test="${params.tipo == 'ok'}">
+		<div class="alert alert-success">
+			${params.msg}
+		</div>
+	</g:if>
+	<g:if test="${params.tipo == 'erro'}">
+		<div class="alert alert-danger">
+			${params.msg}
+		</div>
+	</g:if>
 
-			<section class="content-header">
-			
-			
+
+	<section class="content-header">
+
+
 		<section class="content">
-			
 
-			
-			
-<script>
+
+			<script>
 
          
 			function changeIdNomeacaoParaPortaria(idNomeacao){
@@ -123,6 +121,23 @@
 			            url: "http://"+endereco+":8080/sisGab/nomeacao/getDadosPortaria/"+idNomeacao,
 			            dataType: "json",
 			            success: function(result){
+
+
+			              meses = new Array(12);
+
+			   			  meses[0] = "Janeiro";
+			   			  meses[1] = "Fevereiro";
+			   			  meses[2] = "Março";
+			   			  meses[3] = "Abril";
+			   			  meses[4] = "Maio";
+			   			  meses[5] = "Junho";
+			   			  meses[6] = "Julho";
+			   			  meses[7] = "Agosto";
+			   			  meses[8] = "Setembro";
+			   			  meses[9] = "Outubro";
+			   			  meses[10] = "Novembro";
+			   			  meses[11] = "Dezembro";
+			   			  
                             
 			            	var nome = result.nome.toString().toUpperCase();
 			                var secretaria = result.secretaria.toString().toLowerCase();
@@ -130,6 +145,18 @@
 			                var lotacao = result.lotacao.toString().toLowerCase();
 			                var dataGeracaoDePortaria = result.dataGeracaoDePortaria.toString().substring(8,10) + "/" + result.dataGeracaoDePortaria.toString().substring(5,7) + "/" + result.dataGeracaoDePortaria.toString().substring(0,4);
 			            	var dataFormatada = result.dataNomeacao.toString().substring(8,10) + "/" + result.dataNomeacao.toString().substring(5,7) + "/" + result.dataNomeacao.toString().substring(0,4);
+							
+							var data = new Date()
+							var mes = meses[data.getMonth()];
+							
+							
+
+							var mNomeacao = parseInt(result.dataNomeacao.toString().substring(5,7))-1;
+							var mPortaria = parseInt(result.dataGeracaoDePortaria.toString().substring(5,7))-1;
+							var dataNomeacaoExtenso = result.dataNomeacao.toString().substring(8,10) + " de " + meses[mNomeacao] + " de " + result.dataNomeacao.toString().substring(0,4);
+							var dataPortariaExtenso = result.dataGeracaoDePortaria.toString().substring(8,10) + " de " + meses[mPortaria] + " de " + result.dataGeracaoDePortaria.toString().substring(0,4);
+
+							
                             newWin= window.open("");
 			            	newWin.document.write("<table style='font-size:17px;'>");
 			            	newWin.document.write("<tbody>");
@@ -140,12 +167,12 @@
 			            	newWin.document.write("</tr>");
 			            	newWin.document.write("<tr>");
 			            	newWin.document.write("<td colspan='2'>");
-							newWin.document.write("<p style='text-align:left; '>PORTARIA "+ result.portaria + " , DE "+dataGeracaoDePortaria+ ".</p>");
+							newWin.document.write("<p style='text-align:left; '>PORTARIA "+ result.portaria + " , DE "+dataPortariaExtenso.toUpperCase()+".</p>");
 			            	newWin.document.write("</br>");
 			            	newWin.document.write("</td>");
 			            	newWin.document.write("</tr>");
 			            	newWin.document.write("<tr>");
-			            	newWin.document.write("<td style='padding-left: 500px;' colspan='3'>&nbsp; Nomeia " +cargo);
+			            	newWin.document.write("<td style='padding-left: 500px;' colspan='3'>Nomeia " +cargo);
 			            	newWin.document.write("</br>");
 			            	newWin.document.write("</br>");
 			            	newWin.document.write("</td>");
@@ -167,7 +194,7 @@
 			            	  if(dataGeracaoDePortaria != dataFormatada){
 				            	
 			            	newWin.document.write("<p style='text-align: justify;'>&emsp;&emsp;&emsp;Art. 2&ordm; - Esta Portaria entra em vigor na data "); 
-			            	newWin.document.write("da sua publicacão, retroagindo os seus efeitos a " + dataFormatada+ ".</p>");
+			            	newWin.document.write("da sua publicacão, retroagindo os seus efeitos a " + dataNomeacaoExtenso+ ".</p>");
 			            	newWin.document.write("</br>");
 			            	newWin.document.write("</br>");
 
@@ -184,10 +211,10 @@
 			            	newWin.document.write("disposi&ccedil;&otilde;es em contr&aacute;rio.</p>");
 			            	newWin.document.write("</br>");
 			            	newWin.document.write("<p style='text-align: justify;'>PREFEITURA MUNICIPAL DE S&Atilde;O GON&Ccedil;ALO DO AMARANTE/RN,"); 
-			            	newWin.document.write("<style='text-align: justify;'> GABINETE DO PREFEITO , EM  " + dataFormatada + "</p>");
+			            	newWin.document.write("<style='text-align: justify;'> GABINETE DO PREFEITO , EM  " + dataPortariaExtenso.toUpperCase() + "</p>");
 			            	newWin.document.write("<p>&nbsp;</p>");
 			            	newWin.document.write("<p style='text-align: center;'>_______________________________</p>");
-			            	newWin.document.write("<p style='text-align: center;'>JAIME CALADO PEREIRA DOS SANTOS</p> ");
+			            	newWin.document.write("<p style='text-align: center;'>PAULO EMÍDIO DE MEDEIROS</p> ");
 			            	newWin.document.write("<p style='text-align: center;'>PREFEITO MUNICIPAL</p>");
 			            	newWin.document.write("</td></tr><tr>");
 			            	newWin.document.write("<td colspan='3'>&nbsp;</td>");
@@ -206,6 +233,21 @@
 				
 			var endereco = "${request.getRequestURL().substring(6, request.getRequestURL().indexOf(':8080/'))}";
 			var idNomeacao = document.getElementById("idNomeacaoParaPortaria").value;
+
+			 meses = new Array(12);
+
+  			  meses[0] = "Janeiro";
+  			  meses[1] = "Fevereiro";
+  			  meses[2] = "Março";
+  			  meses[3] = "Abril";
+  			  meses[4] = "Maio";
+  			  meses[5] = "Junho";
+  			  meses[6] = "Julho";
+  			  meses[7] = "Agosto";
+  			  meses[8] = "Setembro";
+  			  meses[9] = "Outubro";
+  			  meses[10] = "Novembro";
+  			  meses[11] = "Dezembro";
 		
 		  $.ajax({
 			  
@@ -219,61 +261,80 @@
                 var cargo = result.cargo.toString().toLowerCase();
                 var lotacao = result.lotacao.toString().toLowerCase();
                 var dataGeracaoDePortaria = result.dataGeracaoDePortaria.toString().substring(8,10) + "/" + result.dataGeracaoDePortaria.toString().substring(5,7) + "/" + result.dataGeracaoDePortaria.toString().substring(0,4);
+
+
+                var mNomeacao = parseInt(result.dataNomeacao.toString().substring(5,7))-1;
+				var mPortaria = parseInt(result.dataGeracaoDePortaria.toString().substring(5,7))-1;
+				var dataNomeacaoExtenso = result.dataNomeacao.toString().substring(8,10) + " de " + meses[mNomeacao] + " de " + result.dataNomeacao.toString().substring(0,4);
+				var dataPortariaExtenso = result.dataGeracaoDePortaria.toString().substring(8,10) + " de " + meses[mPortaria] + " de " + result.dataGeracaoDePortaria.toString().substring(0,4);
+
                 	         
 	            var dataFormatada = result.dataNomeacao.toString().substring(8,10) + "/" + result.dataNomeacao.toString().substring(5,7) + "/" + result.dataNomeacao.toString().substring(0,4);
 					
 			    newWin= window.open("");
-			    newWin.document.write("<table style='font-size:17px;'>");
+            	newWin.document.write("<table style='font-size:17px;'>");
             	newWin.document.write("<tbody>");
             	newWin.document.write("<tr>");
-            	newWin.document.write("<td><img src='${request.getRequestURL().substring(0, request.getRequestURL().indexOf('sisGab/'))}sisGab/static/images/sga.png'; style='width:80px; float:left; margin-top:5px;'> </td>");
-            	newWin.document.write("<td colspan='2'>RIO GRANDE DO NORTE <br /> PREFEITURA MUNICIPAL DE S&Atilde;O GON&Ccedil;ALO DO AMARANTE/RN<br />"); 
+			    newWin.document.write("<td><img src='${request.getRequestURL().substring(0, request.getRequestURL().indexOf('sisGab/'))}sisGab/static/images/sga.png'; style='width:80px; float:left; margin-top:5px;'> </td>");
+            	newWin.document.write("<td colspan='2'>RIO GRANDE DO NORTE <br />PREFEITURA MUNICIPAL DE S&Atilde;O GON&Ccedil;ALO DO AMARANTE/RN<br />"); 
             	newWin.document.write("GABINETE DO PREFEITO <br/> Centro administrativo &agrave; Rua Alexandre Cavalcante, S/N CEP 59.290-000.<br /> CNPJ/MF 08.079.402/0001-35</td>");
             	newWin.document.write("</tr>");
-				newWin.document.write("</table>");
-				newWin.document.write("<p style='text-align:left; '>PORTARIA "+ result.portaria + " , DE "+dataGeracaoDePortaria+ ".</p>");
-				newWin.document.write("<p style='text-align:right; '>Exonera "+cargo +".</p>");
-				newWin.document.write("<p style='text-align: justify;'>&emsp;&emsp;&emsp;O PREFEITO MUNICIPAL DE ");
-				newWin.document.write(" de suas atribuições legais, estabelecidas na Lei Orgânica do município, e em observância");
-				newWin.document.write(" da Lei Complementar nº 69/2015, que dispõe sobre a reestruturação organizacional do ");
-				newWin.document.write(" Poder Executivo do Município de São Gonçalo do Amarante, </p>");
-				newWin.document.write("</br>");
+            	newWin.document.write("<tr>");
+            	newWin.document.write("<td colspan='2'>");
+				newWin.document.write("<p style='text-align:left; '>PORTARIA "+ result.portaria + " , DE "+dataPortariaExtenso.toUpperCase()+ ".</p>");
+            	newWin.document.write("</br>");
+            	newWin.document.write("</td>");
+            	newWin.document.write("</tr>");
+            	newWin.document.write("<tr>");
+            	newWin.document.write("<td style='padding-left: 500px;' colspan='3'>Exonera " +cargo);
+            	newWin.document.write("</br>");
+            	newWin.document.write("</br>");
+            	newWin.document.write("</td>");
+            	newWin.document.write("</tr>");
+            	newWin.document.write("<tr>");
+            	newWin.document.write("<td colspan='3'>");
+            	newWin.document.write("<p style='text-align: justify;'>&emsp;&emsp;&emsp;O PREFEITO MUNICIPAL DE "); 
+            	newWin.document.write("S&Atilde;O GON&Ccedil;ALO DO AMARANTE/RN, &nbsp;no uso&nbsp;de suas atribui&ccedil;&otilde;es legais, estabelecidas na Lei "); 
+            	newWin.document.write("Org&acirc;nica do munic&iacute;pio, e em observ&acirc;ncia&nbsp;da Lei Complementar n&ordm; 69/2015, que disp&otilde;e sobre");
+            	newWin.document.write(" a reestrutura&ccedil;&atilde;o organizacional do&nbsp;Poder Executivo do Munic&iacute;pio de S&atilde;o Gon&ccedil;alo do Amarante,</p>"); 
+            	newWin.document.write("</br>");
       			newWin.document.write("<p style='text-align: justify;'>&emsp;&emsp;&emsp;RESOLVE:</p>");
-				newWin.document.write("</br>");
-				newWin.document.write("<p style='text-align: justify;'>&emsp;&emsp;&emsp;Art. 1º - Exonerar  "+nome+" do cargo de "+cargo+ " ");
-				newWin.document.write("da " +secretaria + ", em exercicio na(o) "  +lotacao+".</p>");
-
-				
-				newWin.document.write("</br>");
-				newWin.document.write("</br>");
-
-				
-				if(dataGeracaoDePortaria != dataFormatada){
-					 
-				newWin.document.write("<p style='text-align: justify;'>&emsp;&emsp;&emsp;Art. 2º - Esta Portaria entra em vigor na data da sua publicação, retroagindo os seus efeitos a "+ dataFormatada +".</p>");
-				newWin.document.write("</br>");
-				newWin.document.write("</br>");
-				
-			     }else{
-			            	
-
-			    newWin.document.write("<p style='text-align: justify;'>&emsp;&emsp;&emsp;Art. 2º; - Esta Portaria entra em vigor na data da sua publicacão.</p>");
+      			newWin.document.write("</br>");
+            	newWin.document.write("<p style='text-align: justify;'>&emsp;&emsp;&emsp;Art. 1&ordm; - Exonerar &nbsp;"+nome+", para "); 
+            	newWin.document.write(" exercer o cargo de "+cargo+" do(a) &nbsp;"+secretaria+" em exercício no(a) "+lotacao+".</p>");
             	newWin.document.write("</br>");
             	newWin.document.write("</br>");
-      	
-			           }
-	              
-				newWin.document.write("<p style='text-align: justify;'>&emsp;&emsp;&emsp;Art. 3º - Revogam-se as disposições em contrário. </p>");
-				newWin.document.write("</br>");
-				newWin.document.write("</br>");
-				
-				newWin.document.write("<p style=text-align:left;>PREFEITURA MUNICIPAL DE SÃO GONÇALO DO AMARANTE/RN , GABINETE DO PREFEITO , EM "+ dataFormatada + "</p>");
-				newWin.document.write("</br>");
-				newWin.document.write("</br>");
-			   	newWin.document.write(" <p style=text-align:center;> _______________________________ </p>");
-				newWin.document.write("<p style=text-align:center;>JAIME CALADO PEREIRA DOS SANTOS</p>");
-				newWin.document.write("<p style=text-align:center;>PREFEITO MUNICIPAL</p>");
-        	    newWin.document.write(" ");
+            	
+            	  if(dataGeracaoDePortaria != dataFormatada){
+	            	
+            	newWin.document.write("<p style='text-align: justify;'>&emsp;&emsp;&emsp;Art. 2&ordm; - Esta Portaria entra em vigor na data "); 
+            	newWin.document.write("da sua publicacão, retroagindo os seus efeitos a " + dataNomeacaoExtenso+ ".</p>");
+            	newWin.document.write("</br>");
+            	newWin.document.write("</br>");
+
+            	  }else{
+	            	
+        		newWin.document.write("<p style='text-align: justify;'>&emsp;&emsp;&emsp;Art. 2&ordm; - Esta Portaria entra em vigor na data "); 
+            	newWin.document.write("da sua publicacão.</p>");
+            	newWin.document.write("</br>");
+            	newWin.document.write("</br>");
+
+	              }
+	            	
+            	newWin.document.write("<p style='text-align: justify;'>&emsp;&emsp;&emsp;Art. 3&ordm; - Revogam-se as ");
+            	newWin.document.write("disposi&ccedil;&otilde;es em contr&aacute;rio.</p>");
+            	newWin.document.write("</br>");
+            	newWin.document.write("<p style='text-align: justify;'>PREFEITURA MUNICIPAL DE S&Atilde;O GON&Ccedil;ALO DO AMARANTE/RN,"); 
+            	newWin.document.write("<style='text-align: justify;'> GABINETE DO PREFEITO , EM  " + dataPortariaExtenso.toUpperCase() + "</p>");
+            	newWin.document.write("<p>&nbsp;</p>");
+            	newWin.document.write("<p style='text-align: center;'>_______________________________</p>");
+            	newWin.document.write("<p style='text-align: center;'>PAULO EMÍDIO DE MEDEIROS</p> ");
+            	newWin.document.write("<p style='text-align: center;'>PREFEITO MUNICIPAL</p>");
+            	newWin.document.write("</td></tr><tr>");
+            	newWin.document.write("<td colspan='3'>&nbsp;</td>");
+            	newWin.document.write("</tr>");
+            	newWin.document.write("</tbody>");
+            	newWin.document.write("</table>");
 				newWin.print();
 				newWin.close();
 
@@ -311,10 +372,7 @@
 		        });
 			}
          
-         </script>
-			
-			
-			<script>
+
 			
 			 function deletar(id) {
 			 var resposta = confirm("Deseja exluir esta nomeação?");
@@ -323,13 +381,16 @@
 			 location.href="/sisGab/nomeacao/deletar/"+id }
 
              }
+             
             </script>
-           		 <div id="reportPrint" style="visibility: hidden;"></div>
+            
+           		<div id="reportPrint" style="visibility: hidden;"></div>
             	<h3>Listagem de Nomeações</h3>
 				
 				<ol class="breadcrumb">
 				</ol>
 				<br>
+				
 				<table id="listarNomeacao" class="table table-striped table-hover example">
 					<thead>
 						<tr>
@@ -345,7 +406,7 @@
 					</thead>
 					<tbody>
 						<g:set var="i" value="${1}" />
-						<g:each in='${nomeacao?}' >
+						<g:each in="${nomeacao?}" >
 							<tr class='linha_registro'>
 								<td>
 									${i++}
@@ -381,7 +442,7 @@
 												</span></a>
 											</div>
 											
-											<%--<div title="Remover" onclick="deletar(${it.id})"
+											<%-- <div title="Remover" onclick="deletar(${it.id})"
 												class="btn btn-danger btn-xs btn-flat">
 												<span class="fa fa-times"></span>
 											</div> 	--%>
@@ -408,7 +469,7 @@
 				</table>
 
 
-				<div class="modal fade" id="relatorioModal" tabindex="-1"
+			<div class="modal fade" id="relatorioModal" tabindex="-1"
 				role="dialog" aria-labelledby="relatorioModalLabel"
 				aria-hidden="true">
 				<div class="modal-dialog">
@@ -442,13 +503,6 @@
 				</div>
 			</div>
 
-
-
-			</section>
-
-
-	<!-- Button trigger modal -->
-			
 			<button class="btn btn-primary btn-flat" data-toggle="modal"
 				data-target="#myModal">
 				<i class="fa fa-plus"></i> Nova Nomeação
@@ -458,6 +512,13 @@
 			<button class="btn btn-danger btn-flat" onClick="printDiv('listarNomeacao')">
 				<i class="fa fa-print"></i> Imprimir
 			</button>
+
+			</section>
+
+
+	<!-- Button trigger modal -->
+			
+
 
 		<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
 				aria-labelledby="myModalLabel" aria-hidden="true">
@@ -472,8 +533,8 @@
 						<div class="modal-body">
 							<g:form controller="nomeacao" action="salvar" class="form">
 								<fieldset>
-								<%--<script type="text/javascript" src="/sisGab/js/mudarSecretaria.js"></script>
-									--%><div class="form-heading">
+								<%-- <script type="text/javascript" src="/sisGab/js/mudarSecretaria.js"></script> --%>
+								<div class="form-heading">
 										<label>Secretaria</label>
 										<div class="controls ">
 
@@ -512,8 +573,7 @@
 									<div class="form-heading">
 										<label>CPF</label>
 										<div class="controls">
-											<g:textField class="form-control" name="cpf" value=""
-												required="true" required="true" />
+											<g:textField class="form-control" name="cpf" value="" />
 										</div>
 									</div>
 									<br>
@@ -554,8 +614,7 @@
 									<div class="form-heading">
 										<label>Efetivo</label>
 										<div class="controls">
-											<%--<g:checkBox name="efetivo" value="false" />
-											--%>
+											<%-- <g:checkBox name="efetivo" value="false" /> --%>
 											<input type="radio" name="efetivo" value="true" > Sim<br>
   											<input type="radio" name="efetivo" value="false" checked> Não<br>
 										</div>
@@ -572,13 +631,14 @@
 								</div>
 									</fieldset>
 			
-         
+                      
 							
 							</g:form>
 							
 						</div>
 					</div>
 				</div>
+				
 			</div>
 	
        </section>

@@ -96,8 +96,7 @@
 								<div class="form-heading">
 									<label>CPF</label>
 									<div class="controls">
-										<g:textField class="form-control" name="cpf" value="${nomeacaoEdit.funcionario.cpf}"
-											required="true" />
+										<g:textField class="form-control" name="cpf" value="${nomeacaoEdit.funcionario.cpf}" />
 									</div>
 								</div>
 								<br>
